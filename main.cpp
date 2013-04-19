@@ -90,8 +90,8 @@ int main()
 
 	while(pcontrol != "end")
 	{
-		pcontrol = 0;
-		cout << "Where would you like to go? (W A S D) :"
+		pcontrol = "0";
+		cout << "Where would you like to go? (W A S D) :";
 		cin >> pcontrol;
 
 		if( pcontrol == "W" || pcontrol== "w")
