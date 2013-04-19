@@ -74,8 +74,14 @@ void Player::displayName()
 void Player::movePlayer(int x, int y)
 {
 
-	pos_.x = (pos_.x) + x;
-	pos_.y = (pos_.y) + y; 
+	if((pos_.x) + x >= 0 && ((pos_.x) + x) < 80 )
+	{
+		pos_.x = (pos_.x) + x;
+	}
+	if( (pos_.y) + y >= 0 && ((pos_.y) + y) < 80)
+	{
+		pos_.y = (pos_.y) + y;
+	}
 
 }
 //////Created a Player class that holds name, position, and health.
@@ -103,8 +109,8 @@ Player & Map::player() {
 }
 
 void Map::print() {
-	for (unsigned i = 0; i < 80; ++i) {
-		for (unsigned j = 0; j < 80; ++j) {
+	for (unsigned j = 0; j < 80; ++j) {
+		for (unsigned i = 0; i < 80; ++i) {
 			if (player_.getpos() == Point(i, j)) {
 				cout << '@';
 			} else {
