@@ -3,28 +3,44 @@
 
 using namespace std;
 
+struct Point {
+	int x;
+	int y;
 
+	Point();
+	Point(int zx, int zy);
+	void set(int zx, int zy);
+	bool operator==(const Point & p);
+};
 
-void print_map(char zmap[80][80]) {
-	for (unsigned i = 0; i < 80; ++i) {
-		for (unsigned j = 0; j < 80; ++j) {
-			cout << zmap[i][j];
-		}
-		cout << endl;
-	}
+bool Point::operator==(const Point & p) {
+	return x == p.x && y == p.y;
 }
 
-class player
+Point::Point() : x(0), y(0) {
+	// DO nothing
+}
+
+Point::Point(int zx, int zy) : x(zx), y(zy) {
+	// Do nothing
+}
+
+void Point::set(int zx, int zy) {
+	x = zx;
+	y = zy;
+}
+
+class Player
 {
 	private:
-		int xpos_;
-		int ypos_;
+		Point pos_;
 		int health_;
 		string name_;
 
 	public: 
-		player();
+		Player();
 		void setpos(int, int);
+		Point getpos() const;
 		void sethealth(int);
 		void setname(string);
 		void displayName();
@@ -32,87 +48,113 @@ class player
 		
 };
 
-void player::setname(string name)
+void Player::setname(string name)
 {
 	name_ = name ;
 }
-void player::setpos(int xpos , int ypos)
+void Player::setpos(int xpos , int ypos)
 {
-	xpos_ = xpos;
-	ypos_ = ypos;
+	pos_.set(xpos, ypos);
 }
-player::player(): xpos_(0), ypos_(0)
+Point Player::getpos() const {
+	return pos_;
+}
+Player::Player(): pos_(0, 0)
 {
 	//do nothing
 }
-void player::sethealth(int health)
+void Player::sethealth(int health)
 {
 	health_ = health;
 }
-void player::displayName()
+void Player::displayName()
 {
 	cout << name_ << endl;
 }
-void player::movePlayer(int x, int y)
+void Player::movePlayer(int x, int y)
 {
-	xpos_ = (xpos_) + x;
-	ypos_ = (ypos_) + y; 
+
+	pos_.x = (pos_.x) + x;
+	pos_.y = (pos_.y) + y; 
 
 }
-//////Created a player class that holds name, position, and health.
+//////Created a Player class that holds name, position, and health.
 
+class Map {
+	Player player_;
+	char map_[80][80];
 
+public:
+	Map();
+	void print();
+	Player & player();
+};
+
+Map::Map() {
+	for (unsigned i = 0; i < 80; ++i) {
+		for (unsigned j = 0; j < 80; ++j) {
+			map_[i][j] = '.';
+		}
+	}
+}
+
+Player & Map::player() {
+	return player_;
+}
+
+void Map::print() {
+	for (unsigned i = 0; i < 80; ++i) {
+		for (unsigned j = 0; j < 80; ++j) {
+			if (player_.getpos() == Point(i, j)) {
+				cout << '@';
+			} else {
+				cout << map_[i][j];
+			}
+		}
+		cout << endl;
+	}
+}
 
 int main()
 {
-	player p1;
-	string name, pcontrol;
-
-
-
-
+	Map map;
+	
 	cout << "Welcome to glowing-nemesis." << endl;
 
-	char map[80][80];
-	for (unsigned i = 0; i < 80; ++i) {
-		for (unsigned j = 0; j < 80; ++j) {
-			map[i][j] = '.';
-		}
-	}
 
-	print_map(map);
-
+	string name;
 	cout << "Enter the name of your warrior: ";
 	cin >> name;
-	p1.setname(name);
-	p1.sethealth(100);
-	//asks user for name of warrior
+	map.player().setname(name);
+	map.player().sethealth(100);
 
-	while(pcontrol != "end")
+	string input;
+	do
 	{
-		pcontrol = "0";
+		map.print();
+
 		cout << "Where would you like to go? (W A S D) :";
-		cin >> pcontrol;
+		cin >> input;
 
-		if( pcontrol == "W" || pcontrol== "w")
+		if(input == "W" || input == "w")
 		{
-			p1.movePlayer(0,-1);
+			map.player().movePlayer(0,-1);
 		}
-		else if(pcontrol == "A" || pcontrol=="a")
+		else if(input == "A" || input == "a")
 		{
-			p1.movePlayer(-1,0);
+			map.player().movePlayer(-1,0);
 		}
-		else if(pcontrol=="S" || pcontrol=="s")
+		else if(input == "S" || input == "s")
 		{
-			p1.movePlayer(0,1);
+			map.player().movePlayer(0,1);
 		}
-		else if(pcontrol=="D" || pcontrol=="d")
+		else if(input == "D" || input == "d")
 		{
-			p1.movePlayer(1,0);
+			map.player().movePlayer(1,0);
 		}
 
-	}
-	/// player movement control. Need to make a good way to prevent player from going out of bounds.
+	} while (input != "end");
+	/// Player movement control. Need to make a good way to prevent Player from going out of bounds.
 
 
 
