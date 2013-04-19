@@ -2,6 +2,8 @@
 
 using namespace std;
 
+kkkk
+
 void print_map(char zmap[80][80]) {
 	for (unsigned i = 0; i < 80; ++i) {
 		for (unsigned j = 0; j < 80; ++j) {
