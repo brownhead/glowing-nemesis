@@ -11,11 +11,13 @@ struct Point {
 	Point(int zx, int zy);
 	void set(int zx, int zy);
 	bool operator==(const Point & p);
+	void move(int zx, int zy);
 };
 
 bool Point::operator==(const Point & p) {
 	return x == p.x && y == p.y;
 }
+
 
 Point::Point() : x(0), y(0) {
 	// DO nothing
@@ -123,23 +125,31 @@ void Map::print() {
 
 class Monster{
 
-    //Data:
-	// Health
+    //Data Members:
+    Point pos;
 	int monHealth;
-	// Name
     string monName;
 public:
 	// Constructor:
-	// ???? Monster();
 	Monster(string, int);
+
     // Member functions:
 
-	// function that changes health
+    // Map:
+    //Map();
+
+    //Position:
+    void setPos(int, int);
+    Point getPos() const;
+    // Monster move/patterns/behavior:
+    void moveMonster(int, int);
+    void setPattern();
+	// Health:
 	void changeHealth(int, bool);
-	// function that sets health
-	void setHealth(int);
-	// function that sets name 
+	void setHealth(int); 
 	void setName(string);
+
+	//Notes:
 	// function that defines movement or a set of fuctions that define movement of monsters!!!
 
 	// what is a monster will it be defined as a  single character or position?
@@ -147,21 +157,30 @@ public:
 
 Monster::Monster(string name, int health) :monName(name), monHealth(health) {}
 
+void Monster::setPos(int xpos, int ypos){
+	pos.set(xpos, ypos);
+}
 
+Point Monster::getPos() const{
+	return pos;
+}
+
+void Monster::moveMonster(int x, int y){
+	
+	pos.x = pos.x + x;
+	pos.y = pos.y + y;
+}
 
 void Monster::changeHealth(int amountToChange, bool addOrNot){
-
-  // if true then add amountToChange to health
+    // if true then add amountToChange to health
 	if(addOrNot){
 		monHealth += amountToChange;
 	}
 
-  // else subtract the amountToChange from health
+    // else subtract the amountToChange from health
 	else{
 		monHealth -= amountToChange;
 	}
-
-  
 }
 
 void Monster::setHealth(int health){
@@ -169,8 +188,7 @@ void Monster::setHealth(int health){
 }
 
 void Monster::setName(string name){
-
-  monName = name;
+	monName = name;
 }
 
 int main()
