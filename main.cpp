@@ -121,6 +121,58 @@ void Map::print() {
 	}
 }
 
+class Monster{
+
+    //Data:
+	// Health
+	int monHealth;
+	// Name
+    string monName;
+public:
+	// Constructor:
+	// ???? Monster();
+	Monster(string, int);
+    // Member functions:
+
+	// function that changes health
+	void changeHealth(int, bool);
+	// function that sets health
+	void setHealth(int);
+	// function that sets name 
+	void setName(string);
+	// function that defines movement or a set of fuctions that define movement of monsters!!!
+
+	// what is a monster will it be defined as a  single character or position?
+};
+
+Monster::Monster(string name, int health) :monName(name), monHealth(health) {}
+
+
+
+void Monster::changeHealth(int amountToChange, bool addOrNot){
+
+  // if true then add amountToChange to health
+	if(addOrNot){
+		monHealth += amountToChange;
+	}
+
+  // else subtract the amountToChange from health
+	else{
+		monHealth -= amountToChange;
+	}
+
+  
+}
+
+void Monster::setHealth(int health){
+	monHealth = health;
+}
+
+void Monster::setName(string name){
+
+  monName = name;
+}
+
 int main()
 {
 	Map map;
