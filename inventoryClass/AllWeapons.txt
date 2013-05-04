@@ -1,0 +1,11 @@
+BloodThirster 	15 	7
+Hunter's_Bow    10 	5
+EpicSword     	100 	4
+The_Tide_Hunter	1 	20
+BeastSlayer   	5	10
+Cat'sCane  	7 	9 
+Teh_Weapon	9 	1 
+Ted's_Icecream 	1 	1000
+
+
+

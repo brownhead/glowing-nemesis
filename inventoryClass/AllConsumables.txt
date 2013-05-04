@@ -1,0 +1,6 @@
+Sushi		1	10
+RiceBall	1	11
+Ham		1	12
+Calimara	1	15
+Lobster		1	40	
+McChicken	1	100
